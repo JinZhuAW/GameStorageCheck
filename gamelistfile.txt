@@ -1,0 +1,1 @@
+[{"name": "League of Legends", "required storage": 8}, {"name": "World of Warcraft", "required storage": 100}, {"name": "Fortnite", "required storage": 16}, {"name": "Super Mario Bros", "required storage": 0.2}, {"name": "Elden Ring", "required storage": 60}, {"name": "God of War", "required storage": 70}, {"name": "It takes two", "required storage": 50}]
