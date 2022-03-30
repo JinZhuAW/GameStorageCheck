@@ -7,9 +7,8 @@
     4. Program will save the game list into a txt file in json format afterwards
 '''
 import shutil
-import os.path
-import json
 import sys
+import json_convertor
 
 # Create some sample game dict
 game1 = {"name": "League of Legends","required storage":8}
@@ -66,33 +65,10 @@ def print_invalid_message():
     '''Print message when user's input is not valid'''
     print("User input is not valid. Please try again!")
 
-def read_and_load():
-    '''Read a txt file contain a json object parse it to a list,
-    if the file is not exist create one and load sample data to the list'''
-    #Check if the file exist
-    file_exists = os.path.exists('game_list_file.txt')
-    if file_exists:
-        # Read the file
-        with open("game_list_file.txt","r",encoding="utf-8") as game_list_file:
-            json_text = game_list_file.read()
-        # Parse it to a list
-            jdata = json.loads(json_text)
-            for item in jdata:
-                game_list.append(item)
-    else :
-        # Create a txtfile
-        with open("game_list_file.txt","x",encoding="utf-8") as game_list_file:
-            game_list_file.close()
-        # Load sample data
-        add_games()
-
-def convert_and_save():
-    '''Convert the game list to a json object and save it to the file'''
-    with open("game_list_file.txt","w",encoding="utf-8") as game_list_file:
-        game_list_file.write(json.dumps(game_list))
 # Main Programe
 GAME_MENU = True
-read_and_load()
+if json_convertor.read_and_load("game_list_file.txt",game_list) is False:
+    add_games()
 while GAME_MENU:
     list_games()
     print("\n")
@@ -113,7 +89,7 @@ while GAME_MENU:
             print("You have to free at least " + str(space_need_to_free) +
             "GB to install the game "+ selected_game.get("name"))
     elif checked_input == 0:
-        convert_and_save()
+        json_convertor.convert_and_save(game_list)
         sys.exit()
     elif checked_input == -2:
         input_game = input("Please enter the name of the game you wish to add:")
@@ -130,7 +106,7 @@ while GAME_MENU:
     print("\n")
     user_input2 = input("Press Enter to continue or press q to exit: ")
     if user_input2 == "q":
-        convert_and_save()
+        json_convertor.convert_and_save(game_list)
         sys.exit()
     else:
         print("\n")
