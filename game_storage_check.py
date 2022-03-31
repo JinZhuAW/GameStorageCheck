@@ -77,7 +77,7 @@ if json_convertor.read_and_load("game_list_file.txt",game_list) is False:
 while GAME_MENU:
     list_games()
     print("\n")
-    menu_input = input("Please choose the game you want to install(a to add a game, q to quit):")
+    menu_input = input("Please choose the game you want to install(a to add a game, q to quit): ")
     print("\n")
     checked_input = check_user_input(menu_input)
     if checked_input > 0 and checked_input - 1 < len(game_list) and type(checked_input) is int:
@@ -85,11 +85,11 @@ while GAME_MENU:
         free_space = get_system_free_storage()
         required_space = selected_game.get("required storage")
         if  free_space >= required_space:
-            print("Congrats! You have enough space to install the game "+
+            print("Congrats! You have enough space to install the game."+
             selected_game.get("name"))
         else:
             space_need_to_free = required_space - free_space
-            print("Oops, You don't have enough space to install the game "+
+            print("Oops, You don't have enough space to install the game."+
             selected_game.get("name"))
             print("You have to free at least " + str(space_need_to_free) +
             "GB to install the game "+ selected_game.get("name"))
@@ -97,8 +97,8 @@ while GAME_MENU:
         json_convertor.convert_and_save(game_list)
         sys.exit()
     elif checked_input == -2:
-        input_game = input("Please enter the name of the game you wish to add:")
-        input_game_storage = input("Please enter the disk storage reqiurement for the game(GB)")
+        input_game = input("Please enter the name of the game you wish to add: ")
+        input_game_storage = input("Please enter the disk storage reqiurement for the game(GB): ")
         checked_input_game_storage= check_user_input(input_game_storage)
         if checked_input_game_storage > 0:
             add_game = {"name":input_game,"required storage":checked_input_game_storage}
