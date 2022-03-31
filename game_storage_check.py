@@ -85,11 +85,11 @@ while GAME_MENU:
         free_space = get_system_free_storage()
         required_space = selected_game.get("required storage")
         if  free_space >= required_space:
-            print("Congrats! You have enough space to install the game."+
+            print("Congrats! You have enough space to install the game "+
             selected_game.get("name"))
         else:
             space_need_to_free = required_space - free_space
-            print("Oops, You don't have enough space to install the game."+
+            print("Oops, You don't have enough space to install the game "+
             selected_game.get("name"))
             print("You have to free at least " + str(space_need_to_free) +
             "GB to install the game "+ selected_game.get("name"))
