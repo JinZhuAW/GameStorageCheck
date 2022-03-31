@@ -35,14 +35,19 @@ def check_user_input(user_input):
         val = int(user_input)
         return val
     except ValueError:
-        # If user inputs 'q' return 0
-        if user_input == "q":
-            return 0
-        # If user inputs 'a' return -2
-        if user_input == "a":
-            return -2
-        # If user inputs anything else return -1
-        return -1
+        try:
+            # Convert it into float
+            val = float(user_input)
+            return val
+        except ValueError:
+            # If user inputs 'q' return 0
+            if user_input == "q":
+                return 0
+            # If user inputs 'a' return -2
+            if user_input == "a":
+                return -2
+            # If user inputs anything else return -1
+            return -1
 
 def list_games():
     '''List all the games'''
@@ -75,7 +80,7 @@ while GAME_MENU:
     menu_input = input("Please choose the game you want to install(a to add a game, q to quit):")
     print("\n")
     checked_input = check_user_input(menu_input)
-    if checked_input > 0 and checked_input - 1 < len(game_list):
+    if checked_input > 0 and checked_input - 1 < len(game_list) and type(checked_input) is int:
         selected_game = game_list[checked_input - 1]
         free_space = get_system_free_storage()
         required_space = selected_game.get("required storage")
